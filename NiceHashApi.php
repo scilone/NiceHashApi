@@ -9,10 +9,17 @@ class NiceHashApi
 {
     const API_BTC_CURRENCY      = 'https://api.coindesk.com/v1/bpi/currentprice.json';
     const API_URL               = 'https://api.nicehash.com/api';
+
     const METHOD_WORKERS        = 'stats.provider.workers';
     const METHOD_STATS          = 'stats.provider';
     const METHOD_DETAILED_STATS = 'stats.provider.ex';
     const METHOD_BALANCE        = 'balance';
+
+    const METRIC_MH  = 'MH/s';
+    const METRIC_TH  = 'TH/s';
+    const METRIC_KH  = 'kH/s';
+    const METRIC_GH  = 'GH/s';
+    const METRIC_SOL = 'Sol/s';
 
     /**
      * @var string
@@ -85,6 +92,39 @@ class NiceHashApi
         27 => 'Sia',
         28 => 'Blake2s',
         29 => 'Skunk'
+    ];
+
+    public static $algorithmMetric = [
+        0 => self::METRIC_MH,
+        1 => self::METRIC_TH,
+        2 => self::METRIC_MH,
+        3 => self::METRIC_MH,
+        4 => self::METRIC_MH,
+        5 => self::METRIC_MH,
+        6 => self::METRIC_MH,
+        7 => self::METRIC_MH,
+        8 => self::METRIC_MH,
+        9 => self::METRIC_MH,
+        10 => self::METRIC_MH,
+        11 => self::METRIC_MH,
+        12 => self::METRIC_MH,
+        13 => self::METRIC_KH,
+        14 => self::METRIC_MH,
+        15 => self::METRIC_KH,
+        16 => self::METRIC_GH,
+        17 => self::METRIC_GH,
+        18 => self::METRIC_GH,
+        19 => self::METRIC_KH,
+        20 => self::METRIC_MH,
+        21 => self::METRIC_GH,
+        22 => self::METRIC_KH,
+        23 => self::METRIC_GH,
+        24 => self::METRIC_SOL,
+        25 => self::METRIC_GH,
+        26 => self::METRIC_MH,
+        27 => self::METRIC_GH,
+        28 => self::METRIC_GH,
+        29 => self::METRIC_MH
     ];
 
     public static $location = [
