@@ -7,13 +7,15 @@ include 'curlHelper/curlHelper.php';
  */
 class NiceHashApi
 {
-    const API_BTC_CURRENCY      = 'https://api.coindesk.com/v1/bpi/currentprice.json';
-    const API_URL               = 'https://api.nicehash.com/api';
+    const API_BTC_CURRENCY = 'https://api.coindesk.com/v1/bpi/currentprice.json';
+    const API_URL          = 'https://api.nicehash.com/api';
 
-    const METHOD_WORKERS        = 'stats.provider.workers';
-    const METHOD_STATS          = 'stats.provider';
-    const METHOD_DETAILED_STATS = 'stats.provider.ex';
-    const METHOD_BALANCE        = 'balance';
+    const METHOD_WORKERS              = 'stats.provider.workers';
+    const METHOD_STATS                = 'stats.provider';
+    const METHOD_DETAILED_STATS       = 'stats.provider.ex';
+    const METHOD_BALANCE              = 'balance';
+    const METHOD_GLOBAL_STATS_CURRENT = 'stats.global.current';
+    const METHOD_GLOBAL_STATS_AVERAGE = 'stats.global.24h';
 
     const METRIC_MH  = 'MH/s';
     const METRIC_TH  = 'TH/s';
@@ -292,6 +294,30 @@ class NiceHashApi
             $result->result->balance_confirmed * $this->getValueCurrencyFavorite(),
             2
         );
+
+        return $result->result;
+    }
+
+    /**
+     * @return stdClass
+     */
+    public function getGlobalCurrentStats() :stdClass
+    {
+        $this->curl->execute(self::API_URL . '?' . http_build_query(['method' => self::METHOD_GLOBAL_STATS_CURRENT]));
+
+        $result = $this->decodeResult($this->curl->getResult());
+
+        return $result->result;
+    }
+
+    /**
+     * @return stdClass
+     */
+    public function getGlobalAverageStats() :stdClass
+    {
+        $this->curl->execute(self::API_URL . '?' . http_build_query(['method' => self::METHOD_GLOBAL_STATS_AVERAGE]));
+
+        $result = $this->decodeResult($this->curl->getResult());
 
         return $result->result;
     }
