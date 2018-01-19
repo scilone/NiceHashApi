@@ -58,6 +58,8 @@ class NiceHashApi
      * NiceHashApi constructor.
      *
      * @param string $addr
+     * @param int    $apiId
+     * @param string $apiKeyRead
      */
     public function __construct(string $addr, int $apiId = 0, string $apiKeyRead = '')
     {
@@ -131,7 +133,7 @@ class NiceHashApi
 
         $this->curl->execute(self::API_URL . '?' . http_build_query($params));
 
-        return $this->decodeResult($this->curl->getResult());
+        return $this->decodeResult($this->curl->getResult())->result;
     }
 
     /**
@@ -146,7 +148,7 @@ class NiceHashApi
 
         $this->curl->execute(self::API_URL . '?' . http_build_query($params));
 
-        return $this->decodeResult($this->curl->getResult());
+        return $this->decodeResult($this->curl->getResult())->result;
     }
 
     /**
@@ -169,7 +171,7 @@ class NiceHashApi
 
         $this->curl->execute(self::API_URL . '?' . http_build_query($params));
 
-        return $this->decodeResult($this->curl->getResult());
+        return $this->decodeResult($this->curl->getResult())->result;
     }
 
     /**
@@ -194,11 +196,16 @@ class NiceHashApi
 
         $result = $this->decodeResult($this->curl->getResult());
 
-        $result->result->balance_pending_value   = $result->result->balance_pending * $this->getValueCurrencyFavorite();
-        $result->result->balance_confirmed_value =
-            $result->result->balance_confirmed * $this->getValueCurrencyFavorite();
+        $result->result->balance_pending_value   = round(
+            $result->result->balance_pending * $this->getValueCurrencyFavorite(),
+            2
+        );
+        $result->result->balance_confirmed_value = round(
+            $result->result->balance_confirmed * $this->getValueCurrencyFavorite(),
+            2
+        );
 
-        return $result;
+        return $result->result;
     }
 
     /**
