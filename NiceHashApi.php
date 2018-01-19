@@ -169,7 +169,7 @@ class NiceHashApi
     /**
      * @return float
      */
-    private function getValueCurrencyFavorite() :float
+    public function getValueCurrencyFavorite() :float
     {
         switch ($this->currencyFavorite) {
             case 'usd':
