@@ -182,6 +182,14 @@ class NiceHashApi
     }
 
     /**
+     * @return string
+     */
+    public function getCurrencyFavorite() :string
+    {
+        return $this->currencyFavorite;
+    }
+
+    /**
      * @param string $result
      *
      * @return stdClass
