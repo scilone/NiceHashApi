@@ -137,6 +137,15 @@ class NiceHashApi
     ];
 
     /**
+     * @var array
+     */
+    private $currencySymbol = [
+        'eur' => '€',
+        'usd' => '$',
+        'gbp' => '£',
+    ];
+
+    /**
      * NiceHashApi constructor.
      *
      * @param string $addr
@@ -189,6 +198,14 @@ class NiceHashApi
     public function getCurrencyFavorite() :string
     {
         return $this->currencyFavorite;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrencyFavoriteSymbol() :string
+    {
+        return $this->currencySymbol[$this->currencyFavorite];
     }
 
     /**
